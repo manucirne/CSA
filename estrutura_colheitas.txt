@@ -1,0 +1,64 @@
+use usuarios
+
+db.colheitas.insert()
+
+{
+"id_autor" = "",
+"timestamp" = ISODate("2018-05-01T00:00:00Z"),
+"data_colheita" = ISODate("2018-05-01T00:00:00Z"),
+"id_agricultor" = "",
+"detalhes_colheita" = {
+
+	"alface":{
+		"deposito" = "",
+		"unidade" ="",
+		"quant_bercos" = 0,
+		"canteiros_colhidos" = ["1","3","4","antigos canteiros"],
+		"mensagem" ="a terra estava úmida"
+		},
+
+	"rucula":{...}
+
+	}}
+
+
+
+
+
+
+
+# Definir as unidades (quem acresenta mais? API?)
+db.unidades.insertMany(
+[{"unidade":"unidade", "abreviacao":"un"},
+{"unidade":"maço", "abreviacao":"mç"},
+{"unidade":"kilo", "abreviacao":"kg"},
+{"unidade":"pedaço", "abreviacao":"pd"},
+{"unidade":"bandeja", "abreviacao":"bdj"},
+{"unidade":"pacote", "abreviacao":"pct"},
+{"unidade":"outro", "abreviacao":""}]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+#colection de variedades para salvar string e fazer update nesse registro
+#fazer fuzzy search
+db.variedades.insert({
+	"variedade":["","",""]
+})
+
+
+# Pegar os depositos do admin
+# Pegar os usuarios do Admin
+# Sql injection
+# senhas encriptadas?
+
+
