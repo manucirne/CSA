@@ -75,13 +75,13 @@ class App extends Component {
     );
 
     return (
-      <div className="App-header">
+      <div className="root">
         <AppBar position="static">
           <Toolbar>
-            <IconButton onClick={this.toggleDrawer('left', true)} color="inherit" aria-label="Menu">
+            <IconButton color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h6" color="inherit" className="grow">
               CSA
             </Typography>
             <Button color="inherit">Login</Button>
