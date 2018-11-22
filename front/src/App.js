@@ -46,14 +46,6 @@ class App extends Component {
     console.log(props)
   }
 
-  state = {
-      value: 0
-  };
-
-  handleChange = (event, value) => {
-  this.setState({ value });
-  };
-
 
   render() {
 
