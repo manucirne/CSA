@@ -53,7 +53,7 @@ class App extends Component {
     const { classes } = this.props;
 
     const sideList = (
-      <div className= "sidebar">
+      <div className= {classes.list}>
         <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
@@ -78,7 +78,7 @@ class App extends Component {
       <div className="root">
         <AppBar position="static">
           <Toolbar>
-            <IconButton color="inherit" aria-label="Menu">
+            <IconButton onClick={this.toggleDrawer('left', true)} color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className="grow">
@@ -110,4 +110,8 @@ class App extends Component {
     )}
 }
 
-export default App;
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(App);
