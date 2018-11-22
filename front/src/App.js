@@ -100,9 +100,7 @@ class App extends Component {
         <BottomNavigationAction label="Receitas" icon={<FoodIcon />} />
       </BottomNavigation>
       </div>
-      
-    );
-  }
+    )}
 }
 
 export default App;
