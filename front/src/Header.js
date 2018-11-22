@@ -8,6 +8,8 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import FoodIcon from '@material-ui/icons/LocalDining';
 import './Header.css';
+import CrudContainer from './CrudContainer'
+
 
 class Header extends Component {
     constructor(props){
@@ -37,7 +39,9 @@ class Header extends Component {
             <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
-
+        
+        <CrudContainer></CrudContainer>
+        
         <BottomNavigation
           value={this.state.value}
           onChange={this.handleChange}
