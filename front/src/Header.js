@@ -9,6 +9,7 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import FoodIcon from '@material-ui/icons/LocalDining';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './Header.css';
+import Login from './Login.js'
 
 class Header extends Component {
     constructor(props){
@@ -69,15 +70,6 @@ function Home() {
   return (
     <div>
       <h2>FOI</h2>
-    </div>
-  );
-}
-
-function Login(props) {
-
-  return (
-    <div>
-      <h2>AQUI VAI PRO LOGIN</h2>
     </div>
   );
 }
