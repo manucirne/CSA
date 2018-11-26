@@ -18,9 +18,9 @@
 module.exports = (app, repository) => {
 
     
+    
 
-
-      app.view('/colheitas', (req, res) => {
+      app.post('/colheitas', (req, res) => {
         // console.log(req.body) 
         if (req.body.id_agricultor) {
             repository.pegaColheitasAgricultor(req.body.id_agricultor,(err, colheita) => {
@@ -49,7 +49,7 @@ module.exports = (app, repository) => {
             repository.pegaColheitaUsuarioAgricultor((req.body.id_agricultor,req.body.id_autor), (err,colheitas) =>{
                 if(err) return next(err);
                 res.json(colheitas);
-            })
+            });
         }
 
 
@@ -61,49 +61,14 @@ module.exports = (app, repository) => {
 
         }
 
-       
-
-
-    })
-
-
-    //   app.get('/colheitas/agricultor/:id', (req, res, next) => {
-    //     repository.pegaColheitasAgricultor(req.params.id,(err, colheita) => {
-    //       if(err) return next(err);
-    //       res.json(colheita);
-    //     });
-    //   });
-
-    // app.post('/colheitas/', (req, res, next) => {
-    //   repository.getMoviePremiers((err, colheitas) => {
-    //     if(err) return next(err);
-    //     // res.json(movies)
-    //     res.send(movies)
-    //   });
-    // });
-
-    // app.delete('/colheitas/:id', (req, res, next) => {
-    //   repository.getMovieById(req.params.id, (err, movie) => {
-    //     if(err) return next(err);
-    //     res.json(movie)
-    //   });
-    // });
-
-    // app.put('/colheitas/:id', (req, res, next) => {
-    //     repository.pegaColheitas(req.params.id, (err, movie) => {
-    //       if(err) return next(err);
-    //       res.json(movie)
-    //     });
-    //   });
-
-    app.post('/teste', (req, res) => {
-        console.log(req.body)
-        if (req.body.z) {
-            console.log('tem z')
-        } else {
-            console.log('nao tem z')
+        if(req.body.inserir){
+            repository.insereNovaColheita(dadosColheitas,(err, colheitas) => {
+                if(err) return next(err);
+                res.status(200).send('Colheita inserida com sucesso!');
+            });
         }
-    })
 
+
+    });
 
 }

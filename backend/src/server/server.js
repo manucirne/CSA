@@ -15,8 +15,7 @@ function start(api, repository, callback){
     app.use(morgan('dev'));
     app.use(helmet());
     app.use((err, req, res, next) => {
-      callback(new Error('Something went wrong!, err:' + err),
-null);
+      callback(new Error('Something went wrong!, err:' + err),null);
       res.status(500).send('Something went wrong!');
     })
     api(app, repository);
