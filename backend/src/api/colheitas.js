@@ -22,19 +22,12 @@ module.exports = (app, repository) => {
 
       app.post('/colheitas', (req, res) => {
         // console.log(req.body) 
-        if (req.body.id_agricultor) {
-            repository.pegaColheitasAgricultor(req.body.id_agricultor,(err, colheita) => {
-                if(err) return next(err);
-                res.json(colheita);
-              });
-        } else if (req.body.id_autor) {
 
-            repository.pegaColheitasUsuario(req.body.id_autor,(err, colheita) => {
+        if(req.body.inserir){
+            repository.insereNovaColheita(dadosColheitas,(err, colheitas) => {
                 if(err) return next(err);
-                res.json(colheita);
-              });
-
-            console.log('nao tem z')
+                res.status(200).send('Colheita inserida com sucesso!');
+            });
         }
 
         else if (req.body._id){
@@ -44,7 +37,7 @@ module.exports = (app, repository) => {
             });
 
         }
-        
+
         else if(req.body.id_agricultor && req.body.id_autor){
             repository.pegaColheitaUsuarioAgricultor((req.body.id_agricultor,req.body.id_autor), (err,colheitas) =>{
                 if(err) return next(err);
@@ -52,6 +45,22 @@ module.exports = (app, repository) => {
             });
         }
 
+        else if (req.body.id_agricultor) {
+            repository.pegaColheitasAgricultor(req.body.id_agricultor,(err, colheita) => {
+                if(err) return next(err);
+                res.json(colheita);
+              });
+        } 
+        
+        else if (req.body.id_autor) {
+
+            repository.pegaColheitasUsuario(req.body.id_autor,(err, colheita) => {
+                if(err) return next(err);
+                res.json(colheita);
+              });
+
+            console.log('nao tem z')
+        }  
 
         else{
         repository.pegaTodasColheitas((err, colheitas) => {
@@ -60,14 +69,6 @@ module.exports = (app, repository) => {
         });
 
         }
-
-        if(req.body.inserir){
-            repository.insereNovaColheita(dadosColheitas,(err, colheitas) => {
-                if(err) return next(err);
-                res.status(200).send('Colheita inserida com sucesso!');
-            });
-        }
-
 
     });
 
