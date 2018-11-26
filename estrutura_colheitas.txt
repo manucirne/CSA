@@ -1,27 +1,33 @@
 use usuarios
 
-db.colheitas.insert()
 
-{
-"id_autor" = "",
-"timestamp" = ISODate("2018-05-01T00:00:00Z"),
-"data_colheita" = ISODate("2018-05-01T00:00:00Z"),
-"id_agricultor" = "",
-"detalhes_colheita" = {
+db.colheita.insert({
+"id_autor" : "1",
+"timestamp" : ISODate("2018-05-01T00:00:00Z"),
+"data_colheita" : ISODate("2019-07-01T00:00:00Z"),
+"id_agricultor" : "2",
+"detalhes_colheita" : {
 
 	"alface":{
-		"deposito" = "",
-		"unidade" ="",
-		"quant_bercos" = 0,
-		"canteiros_colhidos" = ["1","3","4","antigos canteiros"],
-		"mensagem" ="a terra estava úmida"
+		"deposito" : "minha casa",
+		"quantidade" : 13.222,
+		"unidade" :"kg",
+		"quant_bercos" : 22,
+		"canteiros_colhidos" : ["1","3","4","antigos canteiros"],
+		"mensagem" :"a terra estava úmida"
 		},
+	"abacate":{
+		"deposito" : "minha casa",
+		"quantidade" : 3.222,
+		"unidade" :"kg",
+		"quant_bercos" : 22,
+		"canteiros_colhidos" : ["1","3","4","antigos canteiros"],
+		"mensagem" :"a terra estava úmida"
+		}
 
-	"rucula":{...}
-
-	}}
 
 
+	}});
 
 
 
@@ -60,5 +66,10 @@ db.variedades.insert({
 # Pegar os usuarios do Admin
 # Sql injection
 # senhas encriptadas?
+
+
+
+
+
 
 
