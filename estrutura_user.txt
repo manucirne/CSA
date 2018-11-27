@@ -1,0 +1,11 @@
+use usuarios
+
+db.user.insert({
+	"data_registro": ISODate("2018-05-01T00:00:00Z"),
+	"login": "",
+	"senha": "",
+	"nome_completo": "",
+	"nascimeno": ISODate("2018-05-01T00:00:00Z"),
+	"deposito": "",
+	"email": "",
+	"telefone": ""})
