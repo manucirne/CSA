@@ -73,7 +73,7 @@ module.exports = (app, repository) => {
     });
 
 
-    app.post('/colheitas', (req, res) => {
+    app.get('/colheitas', (req, res) => {
         res.send("TESTE");
     });
 }
