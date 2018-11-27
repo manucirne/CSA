@@ -72,4 +72,8 @@ module.exports = (app, repository) => {
 
     });
 
+
+    app.post('/colheitas', (req, res) => {
+        res.send("TESTE");
+    });
 }
