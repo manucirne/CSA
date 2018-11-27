@@ -8,7 +8,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import FoodIcon from '@material-ui/icons/LocalDining';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import './Header.css';
+import './Home.css';
 import Login from './Login.js'
 
 class Header extends Component {
@@ -29,7 +29,7 @@ class Header extends Component {
         return(
           <Router>
             <div className="root">
-              <AppBar position="static">
+              <AppBar position="static"  style={{ backgroundColor: 'rgba(68, 233, 46, 0.918)' }}>
                 <Toolbar>
 
                   <IconButton className="menuButton" color="inherit" aria-label="Menu">
