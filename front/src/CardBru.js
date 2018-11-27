@@ -1,21 +1,22 @@
 import React from 'react';
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Logo from './img/bolo-de-cenoura.jpeg'
-import Collapse from '@material-ui/core/Collapse';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+ const ITEM_HEIGHT = 48;
 const styles = theme => ({
   card: {
     maxWidth: 400,
@@ -44,27 +45,21 @@ const styles = theme => ({
     backgroundColor: red[500],
   },
 });
-
-class RecipeCard extends React.Component {
+ class RecipeCard extends React.Component {
   state = {
     anchorEl: null,
     expanded: false, 
   };
-
-  handleExpandClick = () => {
+   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
-
-
-  handleClick = event => {
+   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
-
-  handleClose = () => {
+   handleClose = () => {
     this.setState({ anchorEl: null });
   };
-
-  render() {
+   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
@@ -81,36 +76,38 @@ class RecipeCard extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Usuário"
-          subheader="Data DD/MM/AAAA"
+          title="Shrimp and Chorizo Paella"
+          subheader="September 14, 2016"
         />
         <CardMedia
           className={classes.media}
-          image={Logo}
+          image="/static/images/cards/paella.jpg"
           title="Paella dish"
         />
         <CardContent>
           <Typography component="p">
-          <ul>
-            <li>3 cenouras médias raspadas e picadas</li>
-            <li>3 ovos</li>
-            <li>1 xícara de óleo</li>        
-          </ul>
-          Depois unte e enfarinhe uma forma e despeje a massa nela. Asse em forno médio por cerca de 40 minutos. Tire do forno, espere amornar e desenforme.
+            This impressive paella is a perfect party dish and a fun meal to cook together with your
+            guests. Add 1 cup of frozen peas along with the mussels, if you like.
           </Typography>
-          <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded,
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="Show more"
-            > 
-            <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
         </CardContent>
+        <CardActions className={classes.actions} disableActionSpacing>
+          <IconButton aria-label="Add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton aria-label="Share">
+            <ShareIcon />
+          </IconButton>
+          <IconButton
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded,
+            })}
+            onClick={this.handleExpandClick}
+            aria-expanded={this.state.expanded}
+            aria-label="Show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Method:</Typography>
@@ -142,9 +139,7 @@ class RecipeCard extends React.Component {
     );
   }
 }
-
-RecipeCard.propTypes = {
+ RecipeCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-export default withStyles(styles)(RecipeCard);
+ export default withStyles(styles)(RecipeCard); 
