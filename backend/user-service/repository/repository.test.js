@@ -3,6 +3,8 @@ const repository = require('./repository');
 
 function runTests(){
     var id = null;
+    var l = "oba";
+    var s = "oba";
 
     test('Repository GetAllUser', (t) => {
         repository.getAllUser((err, user) => {
@@ -23,6 +25,14 @@ function runTests(){
             t.assert(!err && user, "User by Id Returned");
             t.end();
         });
+    })
+
+    test("Repository GetLogin", (t) => {
+        repository.getLogin(l, s, (err, user) => {
+            console.log(err, user)
+            t.assert(!err && user && user.length > 0, "User Login Returned");
+            t.end();
+        })
     })
 
     test("repository Disconnect", (t) => {

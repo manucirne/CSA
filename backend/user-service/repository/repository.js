@@ -13,9 +13,15 @@ function getUserById(id, callback){
         });
     }
 
+function getLogin(l, s, callback){
+    mongodb.connect((err,db) => {
+        db.collection("user").findOne({$and:[{login:l},{senha:s}]}, callback)
+    })
+}
+
 
 function disconnect(){
     return mongodb.disconnect();
     }
 
-module.exports = {getAllUser, getUserById, disconnect}
+module.exports = {getAllUser, getUserById, getLogin, disconnect}
