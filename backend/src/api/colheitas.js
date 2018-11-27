@@ -24,7 +24,7 @@ module.exports = (app, repository) => {
         // console.log(req.body) 
 
         if(req.body.inserir){
-            repository.insereNovaColheita(dadosColheitas,(err, colheitas) => {
+            repository.insereNovaColheita(req.body.inserir,(err, colheitas) => {
                 if(err) return next(err);
                 res.status(200).send('Colheita inserida com sucesso!');
             });
@@ -73,7 +73,7 @@ module.exports = (app, repository) => {
     });
 
 
-    app.post('/colheitas', (req, res) => {
+    app.get('/colheitas', (req, res) => {
         res.send("TESTE");
     });
 }
