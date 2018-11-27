@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import { Toolbar, IconButton, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+import HomeIcon from '@material-ui/icons/Home';
 import FoodIcon from '@material-ui/icons/LocalDining';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './Home.css';
@@ -29,11 +29,10 @@ class Header extends Component {
         return(
           <Router>
             <div className="root">
-              <AppBar position="static"  style={{ backgroundColor: 'rgba(68, 233, 46, 0.918)' }}>
+              <AppBar position="static"  style={{ backgroundColor: 'rgba(89, 199, 75, 0.966)' }}>
                 <Toolbar>
-
                   <IconButton className="menuButton" color="inherit" aria-label="Menu">
-                    <MenuIcon />
+                    <HomeIcon />
                   </IconButton>
 
                     <Typography variant="h6" color="inherit" className="grow">
@@ -49,11 +48,11 @@ class Header extends Component {
 
               <BottomNavigation value={this.state.value} onChange={this.handleChange} showLabels>
                   <Link to="/" style={{textDecoration:'none'}}>
-                    <BottomNavigationAction label="Informações" icon={<AssessmentIcon/>} showLabel={true}/>
+                    <BottomNavigationAction label="Informações" icon={<AssessmentIcon style={{color: 'rgba(82, 233, 62, 0.966)'}}/>} showLabel={true}/>
                   </Link>
                   
                   <Link to="/receitas" style={{textDecoration:'none'}}> 
-                    <BottomNavigationAction label="Receitas" icon={<FoodIcon/>} showLabel={true}/>
+                    <BottomNavigationAction label="Receitas" icon={<FoodIcon style={{color: 'rgba(82, 233, 62, 0.966)'}}/>} showLabel={true}/>
                   </Link>
               </BottomNavigation>
 
