@@ -12,9 +12,26 @@ import Grid from '@material-ui/core/Grid';
 export default class Colheitas extends Component{
     constructor(props){
         super(props)
+        this.state = { data: [] };
     }
-
-    render(){return (
+    
+    request = async () => {
+        let response = await fetch('/colheitas',{
+            method: 'POST',
+            headers: {'Accept': 'application/json',
+               'Content-Type': 'application/json'},
+            body: JSON.stringify({})
+        });
+        const futureJson = await response.json();
+        this.setState({ data: futureJson }); 
+    }
+    
+    componentWillMount() {
+        this.request();
+     }
+    
+    render(){
+    return (
     <div>
         <div>
         <Grid
@@ -70,4 +87,3 @@ function NestedGrid(props) {
   NestedGrid.propTypes = {
     classes: PropTypes.object.isRequired
   };
-
