@@ -15,7 +15,7 @@ export default class Colheitas extends Component{
         this.state = { data: [] };
     }
     
-    request = async () => {
+    request = async() => {
         let response = await fetch('/colheitas',{
             method: 'POST',
             headers: {'Accept': 'application/json',
@@ -23,7 +23,7 @@ export default class Colheitas extends Component{
             body: JSON.stringify({})
         });
         const futureJson = await response.json();
-        this.setState({ data: futureJson }); 
+        this.setState({ data: futureJson });
     }
     
     componentWillMount() {
@@ -31,6 +31,43 @@ export default class Colheitas extends Component{
      }
     
     render(){
+        var cards = [];
+        console.log(this.state.data)
+        for (var i=0; i<this.state.data.length; i++){
+            var colheita = this.state.data[i];
+            var Sdados = JSON.stringify(colheita["detalhes_colheita"])
+            var Jdados = JSON.parse(Sdados)
+
+            for (var key in Jdados){
+                var canteiros = "";
+                for (var canteiro in Jdados[key]["canteiros_colhidos"]){
+                    canteiros += Jdados[key]["canteiros_colhidos"][canteiro] + ", ";
+                }
+                canteiros = canteiros.substring(0, canteiros.length - 2);
+
+                cards.push(<Grid item xs={5}>
+                    <Card>
+                        <CardContent>
+                            <Typography variant="h5" component="h2">
+                            <b>{key}</b> {colheita["id_autor"]}
+                            </Typography>
+                            <Typography component="p">
+                                <u><b>Deposito:</b></u> {Jdados[key]["deposito"]}
+                                <br />
+                                <u><b>Quantidade:</b></u> {Jdados[key]["quantidade"]} {Jdados[key]["unidade"]}
+                                <br />
+                                <u><b>Quantidade berços:</b></u> {Jdados[key]["quant_bercos"]}
+                                <br />
+                                <u><b>Mensagem:</b></u> {Jdados[key]["mensagem"]}
+                                <br />
+                                <u><b>Canteiros colhidos:</b></u> {canteiros}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>)
+            }
+        }
+
     return (
     <div>
         <div>
@@ -50,20 +87,7 @@ export default class Colheitas extends Component{
         </div>
         <div>
             <React.Fragment>
-            <Grid item xs={5}>
-                <Card>
-                    <CardContent>
-                        <Typography variant="h5" component="h2">
-                            Nome do cara
-                        </Typography>
-                        <Typography component="p">
-                            Outras infos....
-                            <br />
-                            Pararara
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
+            {cards}
             </React.Fragment>
         </div>
     </div>
