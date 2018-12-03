@@ -11,6 +11,13 @@ module.exports = (app, repository) => {
             if(err) return next(err);
             res.json(user)
         });
-        
     })
+
+    app.get("/login/:l/:s", (req,res,next) => {
+        repository.getLogin(req.params.l, req.params.s, (err, user) => {
+            if(err) return next(err);
+            res.json(user)
+        })
+    })
+
 }

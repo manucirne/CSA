@@ -2,25 +2,21 @@ import React, { Component } from 'react';
 import Downshift from "downshift";
 import fuzzaldrin from "fuzzaldrin-plus";
 
-const items = ["Aayla Secura", "Admiral Ackbar", "Admiral Thrawn",
-                "Ahsoka Tano", "Anakin Solo", "Asajj Ventress",
-                "Aurra Sing", "Senator Bail Organa", "Barriss Offee", 
-                "Bastila Shan", "Ben Skywalker", "Bib Fortuna", 
-                "Biggs Darklighter", "Boba Fett", "Bossk", "Brakiss",
-                "C-3PO", "Cad Bane", "Cade Skywalker", "Callista Ming", 
-                "Captain Rex", "Carnor Jax"]
-const fuzzyFilter = input => {
-  return fuzzaldrin.filter(items, input);
-}
 
 export default class FuzzyBar extends Component{
     constructor(props){
         super(props)
         console.log(props)
     }
+
     
 
-    render(){return(
+    render(){
+      const items = this.props.items
+      const fuzzyFilter = input => {
+        return fuzzaldrin.filter(items, input);
+      }
+      return(
         <Downshift onChange={selection => alert(`You selected ${selection}`)}>
     {({
       getInputProps,
