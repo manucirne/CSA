@@ -74,6 +74,6 @@ module.exports = (app, repository) => {
 
 
     app.get('/colheitas', (req, res) => {
-        res.send("TESTE");
+        res.send("O metodo get está funcionando");
     });
 }
