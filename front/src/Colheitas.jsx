@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 export default class Colheitas extends Component{
@@ -28,11 +27,10 @@ export default class Colheitas extends Component{
     
     componentWillMount() {
         this.request();
-     }
+    }
     
     render(){
         var cards = [];
-        console.log(this.state.data)
         for (var i=0; i<this.state.data.length; i++){
             var colheita = this.state.data[i];
             var Sdados = JSON.stringify(colheita["detalhes_colheita"])
@@ -45,8 +43,8 @@ export default class Colheitas extends Component{
                 }
                 canteiros = canteiros.substring(0, canteiros.length - 2);
 
-                cards.push(<Grid item xs={5}>
-                    <Card>
+                cards.push(<Grid item xs={3}>
+                    <Card className={this.props.paper}>
                         <CardContent>
                             <Typography variant="h5" component="h2">
                             <b>{key}</b> {colheita["id_autor"]}
@@ -80,34 +78,17 @@ export default class Colheitas extends Component{
             <Button variant="fab" color="primary" aria-label="Add">
                 <AddIcon />
             </Button>
-            <Button variant="fab" color="secondary" aria-label="Edit">
-                <Icon>edit_icon</Icon>
-            </Button>
         </Grid>
         </div>
         <div>
-            <React.Fragment>
-            {cards}
-            </React.Fragment>
+        <Grid container spacing={8}>
+          <Grid container item xs={12} spacing={24}>
+                <React.Fragment>
+                {cards}
+                </React.Fragment>
+            </Grid>
+        </Grid>
         </div>
     </div>
   )}
 }
-
-function NestedGrid(props) {
-    const { classes } = props;
-  
-    return (
-      <div className={classes.root}>
-        <Grid container spacing={8}>
-          <Grid container item xs={12} spacing={24}>
-            <Colheitas classes={classes} />
-          </Grid>
-        </Grid>
-      </div>
-    );
-  }
-  
-  NestedGrid.propTypes = {
-    classes: PropTypes.object.isRequired
-  };
