@@ -1,0 +1,8 @@
+db.receitas.insert({
+"id_autor": "1",
+"data_criacao": ISODate("2018-05-01T00:00:00Z"),
+"ultima_mod": ISODate("2018-05-01T00:00:00Z"),
+"titulo": "bolo banana",
+"texto": "farinha e banana (so)",
+"imagem": "https://abrilmdemulher.files.wordpress.com/2016/09/receita-torta-de-maca-de-micro-ondas.jpg?quality=90&strip=info&w=620&h=372&crop=1"
+})

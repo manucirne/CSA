@@ -37,14 +37,15 @@ function runTests(){
             .expect(200)
             .end((err, res) => {
                 t.error(err, "No Errors");
+                console.log(res.body)
                 t.assert(res.body, "Users By Id Returned");
                 t.end();
             })
         })
 
-        test("GET /user/:l/:s", (t) => {
+        test("GET /login", (t) => {
             supertest(app)
-            .get("/login/" + l + "/" + s)
+            .get("/login")
             .expect("Content-Type", /json/)
             .expect(200)
             .end((err, res) =>{

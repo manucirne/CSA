@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Link } from "react-router-dom";
 
-
 export default class Colheitas extends Component{
     constructor(props){
         super(props)
@@ -28,7 +27,7 @@ export default class Colheitas extends Component{
     }
     
     componentWillMount() {
-        this.request();
+        //this.request();
     }
     
     render(){

@@ -1,6 +1,7 @@
 use usuarios
 
 db.user.insert({
+	"id": "1",
 	"data_registro": ISODate("2018-05-01T00:00:00Z"),
 	"login": "",
 	"senha": "",
