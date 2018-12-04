@@ -12,13 +12,14 @@ import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom
 import './Home.css';
 import Login from './Login.js'
 import Colheita from './Colheitas'
+import Nova from './FormColheita'
 
 class Home extends Component {
     constructor(props){
         super(props)
         this.state = {
           user_id: null,
-          user_name: null
+          user_name: null,
         }
     }
 
@@ -42,7 +43,7 @@ class Home extends Component {
       const checkLogInColheita = () =>{
         if(this.state.user_id){
           return(
-            <Colheita user_name={this.state.user_name} />
+            <Colheita user_name={this.state.user_name} data={this.state.data} />
         )}
         return(
           <Redirect to={{pathname: '/login'}}/>
@@ -87,7 +88,8 @@ class Home extends Component {
             <Route exact path="/" component={Teste} />
             <Route path="/login" component={logInFunction} />
             <Route path="/receitas" component={Receitas} />
-            <Route path="/colheita" component={checkLogInColheita} />
+            <Route exact path="/colheita" component={checkLogInColheita} />
+            <Route path="/colheita/nova" component={Nova} />
             </div>
           </Router>  
         );
