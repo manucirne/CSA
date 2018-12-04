@@ -11,9 +11,10 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import EditIcon from '@material-ui/icons/Edit';
 import Logo from './img/bolo-de-cenoura.jpeg'
 import Collapse from '@material-ui/core/Collapse';
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const styles = theme => ({
@@ -78,7 +79,7 @@ class RecipeCard extends React.Component {
           }
           action={
             <IconButton>
-              <MoreVertIcon />
+              <DeleteRoundedIcon />
             </IconButton>
           }
           title="Usuário"
@@ -99,6 +100,9 @@ class RecipeCard extends React.Component {
           Depois unte e enfarinhe uma forma e despeje a massa nela. Asse em forno médio por cerca de 40 minutos. Tire do forno, espere amornar e desenforme.
           </Typography>
           <CardActions className={classes.actions} disableActionSpacing>
+            <IconButton aria-label="Share">
+              <EditIcon />
+            </IconButton>
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,
