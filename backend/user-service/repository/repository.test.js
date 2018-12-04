@@ -30,7 +30,7 @@ function runTests(){
     test("Repository GetLogin", (t) => {
         repository.getLogin(l, s, (err, user) => {
             console.log(err, user)
-            t.assert(!err && user && user.length > 0, "User Login Returned");
+            t.assert(!err && user, "User Login Returned");
             t.end();
         })
     })

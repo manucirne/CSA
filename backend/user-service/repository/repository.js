@@ -19,7 +19,6 @@ function getLogin(l, s, callback){
     })
 }
 
-
 function disconnect(){
     return mongodb.disconnect();
     }
