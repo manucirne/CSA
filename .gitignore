@@ -1,4 +1,7 @@
 backend/data/
-.DS_Store
-backend/src/node_modules
+node_modules/
 
+# OSX files
+.DS_Store
+._.DS_Store
+*.fuse_*
