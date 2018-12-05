@@ -40,9 +40,14 @@ export default class Colheitas extends Component{
         //https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
     }
 
-    deleteColheita = (idColheita) =>{
-        console.log("Aqui a colheita será apagada!")
-        //Aqui a colheita será apagada....
+    deleteColheita(idColheita) {
+        console.log(idColheita)
+        fetch('/colheitas',{
+            method: 'DELETE',
+            headers: {'Accept': 'application/json',
+            'Content-Type': 'application/json'},
+            body: JSON.stringify({ _id: idColheita })
+        })
     }
     
     render(){
