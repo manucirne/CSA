@@ -14,7 +14,7 @@ import './Home.css';
 import Login from './Login.js'
 import Colheita from './Colheitas'
 import FormColheita from './FormColheita'
-import Dash from './Dash'
+import Dash from './Dash.js'
 
 class Home extends Component {
     constructor(props){
@@ -23,6 +23,7 @@ class Home extends Component {
           user_id: null,
           user_name: null,
           id_colheita: null,
+          user: {}
         }
     }
 
@@ -68,6 +69,35 @@ class Home extends Component {
         )
       }
 
+      const LogOut = () =>{
+        this.setState({user:""})
+      } 
+      
+      const add_dash = () =>{
+      if(this.state.user_id){
+        return(
+            <Dash id={this.state.user_id}></Dash>
+      )}
+      else{
+          return(
+                <Dash id={null}></Dash>
+          )}
+    }
+
+      const nome = () =>{
+        if(this.state.user == null){
+          return(<Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>)
+        }
+        else if(this.state.user.nome_completo == "" || this.state.user == "" ){
+          return(
+            <Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>
+          )
+        }
+        return(
+          <Button onClick={LogOut} style={{textDecoration:'none', color:"white", fontSize:"16px"}}>{this.state.user.nome_completo}</Button>
+        )
+      }
+
         return(
           <Router>
             <div className="root">
@@ -81,10 +111,8 @@ class Home extends Component {
                     <Typography variant="h6" color="inherit" className="grow">
                         <h1 style={{color:"white"}}>CSA</h1>
                     </Typography>
-
-                      <Button color="inherit">
-                        <Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>
-                      </Button>
+                      
+                      {nome()}
                   
                 </Toolbar>
               </AppBar>
@@ -103,7 +131,7 @@ class Home extends Component {
                   </Link>
               </BottomNavigation>
 
-            <Route exact path="/" component={Dash} />
+            <Route exact path="/" component={add_dash} />
             <Route exact path="/login" render={(props) => <Login {...props} onLogin={this.onUserLogin} /> } />
             <Route exact path="/receitas" component={Receitas} />
             <Route exact path="/colheita" component={checkLogInColheita} />
