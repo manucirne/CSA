@@ -71,6 +71,17 @@ class Home extends Component {
       const LogOut = () =>{
         this.setState({user:""})
       } 
+      
+      const add_dash = () =>{
+      if(this.state.user_id){
+        return(
+            <Dash id={this.state.user_id}></Dash>
+      )}
+      else{
+          return(
+                <Dash id={null}></Dash>
+          )}
+    }
 
       const nome = () =>{
         if(this.state.user.nome_completo == "" || this.state.user == "" ){
@@ -116,7 +127,7 @@ class Home extends Component {
                   </Link>
               </BottomNavigation>
 
-            <Route exact path="/" component={Dash} />
+            <Route exact path="/" component={add_dash} />
             <Route exact path="/login" render={(props) => <Login {...props} onLogin={this.onUserLogin} /> } />
             <Route exact path="/receitas" component={Receitas} />
             <Route exact path="/colheita" component={checkLogInColheita} />
