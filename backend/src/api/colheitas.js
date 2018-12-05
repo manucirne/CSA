@@ -72,7 +72,28 @@ module.exports = (app, repository) => {
 
     });
 
+    app.delete('colheitas',(req,res)=>{
+        repository.deletaColheita(req.body._id,(err,colheita)=>{
+            if(err){
+                console.log(err)
+            }
+            req.json(colheita);
+        })
+    });
 
+    app.put('colheitas',(req,res)=>{
+        if(req.body && req.body._id){
+            repository.deletaColheita(req.body._id,req.body,(err,colheita)=>{
+                if(err){
+                    console.log(err)
+                }
+                req.json(colheita);
+            })
+        }
+
+    });
+
+    
     app.get('/colheitas', (req, res) => {
         res.send("O metodo get está funcionando");
     });

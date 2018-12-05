@@ -9,8 +9,6 @@ export default class FuzzyBar extends Component{
         console.log(props)
     }
 
-    
-
     render(){
       const items = this.props.items
       const fuzzyFilter = input => {
