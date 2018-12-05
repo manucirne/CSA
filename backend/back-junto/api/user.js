@@ -13,12 +13,12 @@ module.exports = (app, repository) => {
         });
     })
 
-    app.post("/user/login", (req,res) => {
+    app.post("/login", (req,res) => {
         console.log(req.body);
-        if (!req.body.senha) {
+        if (!req.body.password) {
             return res.status(403).json({message: `Missing password!`}) 
         }
-        repository.getLogin(req.body.login, req.body.senha, (err, user) => {
+        repository.getLogin(req.body.username, req.body.password, (err, user) => {
             if(err) return err;
             return res.json(user)
         })

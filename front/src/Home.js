@@ -103,7 +103,7 @@ class Home extends Component {
                   </Link>
               </BottomNavigation>
 
-            
+            <Route exact path="/" component={Dash} />
             <Route path="/login" render={(props) => <Login {...props} onLogin={this.onUserLogin} /> } />
             <Route path="/receitas" component={Receitas} />
             <Route exact path="/colheita" component={checkLogInColheita} />
