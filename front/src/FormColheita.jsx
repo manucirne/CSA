@@ -51,13 +51,24 @@ export default class FormColheita extends Component{
         this.state = {
             variedades: null,
             toDashboard: false,
-            name: 'tenorio',
+            nome: 'tenorio',
+            colheitas: null,
+            produtor: null,
+            data: null,
+            variedade: null,
+            n_bercos: null,
+            mensagem: null,
+            canteiros: null,
+            n_colhidos: null,
         }
     }
 
 
     componentWillMount() {
-        //this.fetchData()
+        //this.fetchData();
+        if(this.props.idColheita != null){
+        this.fetchOldColheita();
+        }
      }
 
 
@@ -106,13 +117,53 @@ export default class FormColheita extends Component{
           [name]: event.target.value
         });
       };
+
+      fetchOldColheita = async () => {
+        let id_colheita = this.props.idColheita;
+        console.log(id_colheita)
+        let response = await fetch('/colheitas',{
+          method: 'POST',
+          headers: {'Accept': 'application/json',
+             'Content-Type': 'application/json'},
+          body: JSON.stringify({
+              _id : id_colheita
+          })
+      });
+      const futureJson = await response.json();
+      this.setState({ colheitas: futureJson });
+      
+        for (var i=0; i<this.state.colheitas.length; i++){
+          var colheita = this.state.colheitas[i];
+          var Sdados = JSON.stringify(colheita["detalhes_colheita"])
+          var Jdados = JSON.parse(Sdados)
+
+          for (var key in Jdados){
+            this.state.variedade = console.log(key)
+            this.state.n_bercos =  Jdados[key]["quant_bercos"]
+            this.state.canteiros = Jdados[key]["canteiros_colhidos"][0]
+            this.state.n_colhido = Jdados[key]["quantidade"]
+            this.state.mensagem = Jdados[key]["mensagem"]
+
+            this.setState({
+              variedade: key,
+              nome: 'tenorio',
+              n_bercos: Jdados[key]["quant_bercos"],
+              mensagem: Jdados[key]["mensagem"],
+              canteiros: Jdados[key]["canteiros_colhidos"][0],
+              n_colhidos: Jdados[key]["quantidade"],
+          })
+          }
+        }
+
+      }
  
-     fetchData = async () => {
-         let res = await fetch('/colheita',{ //ACERTAR API AGRICULTORES
+     fetchData = async () => {   
+        let res = await fetch('/agricultores',{ //ACERTAR API AGRICULTORES
              method: 'POST',
              headers: {'Accept': 'application/json',
                 'Content-Type': 'application/json'},
              body: JSON.stringify({
+               
              })
          })
          res = await res.json()
@@ -121,6 +172,8 @@ export default class FormColheita extends Component{
              variedades: res.variedades,
              produtores: res.produtores
         })
+
+
      }
 
 
