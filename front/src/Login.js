@@ -22,6 +22,10 @@ class Login extends Component {
       this.setState({ errorMessage: 'Por favor coloque seu usuario e sua senha'})
     }
 
+    else if (this.state.username === '' && this.state.password === '') {
+      this.setState({ errorMessage: 'Por favor coloque seu usuario e sua senha'})
+    }
+
     try {
       let response = await fetch('/login', {
         method: 'POST',
@@ -43,6 +47,10 @@ class Login extends Component {
       if (responseJson.id) {
         this.props.onLogin(responseJson)
         this.props.history.push('/')
+      }
+
+      else if (responseJson.id == null) {
+        this.setState({ errorMessage: 'Usuário ou senha inválidos'})
       }
 
     } catch (error) {
