@@ -24,7 +24,7 @@ class Home extends Component {
           user_id: null,
           user_name: null,
           id_colheita: null,
-          user: {}
+          user: ""
         }
     }
 
@@ -85,19 +85,16 @@ class Home extends Component {
           )}
     }
 
-      const nome = () =>{
-        if(this.state.user == null){
-          return(<Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>)
-        }
-        else if(this.state.user.nome_completo == "" || this.state.user == "" ){
-          return(
-            <Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>
-          )
-        }
+    const nome = () =>{
+      if(this.state.user.nome_completo == "" || this.state.user == "" ){
         return(
-          <Button onClick={LogOut} style={{textDecoration:'none', color:"white", fontSize:"16px"}}>{this.state.user.nome_completo}</Button>
+          <Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>
         )
       }
+      return(
+        <Button onClick={LogOut} style={{textDecoration:'none', color:"white", fontSize:"16px"}}>{this.state.user.nome_completo}</Button>
+      )
+    }
 
         return(
           <Router>

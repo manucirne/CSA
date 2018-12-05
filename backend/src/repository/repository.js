@@ -41,32 +41,29 @@ function pegaColheitasUsuario(id,callback){
 
 
 
-function insereNovaColheita(callback,dadosColheita){
+function insereNovaColheita(dadosColheita,callback){
     mongodb.connect((err,db) => {
         db.collection(collectionDado).insert(dadosColheita,(err, res) =>{
             if (err) throw err;
             console.log("Colheita inserida");
-            db.close();
         });
     });
 }
 
-function editaColheita(callback,id,dadosColheita){
+function editaColheita(id,dadosColheita,callback){
     mongodb.connect((err,db) => {
         db.collection(collectionDado).updateOne({_id:require("mongodb").ObjectId(id)},dadosColheita,(err, res) =>{
             if (err) throw err;
             console.log("Colheita atualizada");
-            db.close();
         });
     });
 }
 
-function deletaColheita(callback,id){
+function deletaColheita(id, callback){
     mongodb.connect((err,db) => {
         db.collection(collectionDado).deleteOne({_id:require("mongodb").ObjectId(id)},(err, res) =>{
             if (err) throw err;
             console.log("Colheita deletada");
-            db.close();
         });
     });
 }

@@ -40,14 +40,13 @@ export default class Colheitas extends Component{
     }
 
     deleteColheita(idColheita) {
-        console.log(idColheita)
         fetch('/colheitas',{
             method: 'DELETE',
             headers: {'Accept': 'application/json',
             'Content-Type': 'application/json'},
             body: JSON.stringify({ _id: idColheita })
         })
-        // this.request();
+        this.request();
     }
     
     render(){
