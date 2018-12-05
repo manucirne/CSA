@@ -19,7 +19,6 @@ import Collapse from '@material-ui/core/Collapse';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import './Card.css';
 
@@ -55,21 +54,21 @@ const styles = theme => ({
 
 class RecipeCard extends React.Component {
   state = {
-    anchorEl: null,
-    expanded: false, 
+    expanded0: false,
+    expanded1: false,
+    expanded2: false, 
   };
 
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
+  handleExpandClick0 = () => {
+    this.setState(state => ({ expanded0: !state.expanded0 }));
   };
 
-
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+  handleExpandClick1 = () => {
+    this.setState(state => ({ expanded1: !state.expanded1 }));
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleExpandClick2 = () => {
+    this.setState(state => ({ expanded2: !state.expanded2 }));
   };
 
   handleChange = (event) => {
@@ -80,13 +79,6 @@ class RecipeCard extends React.Component {
     event.preventDefault();
  }
 
- state = {
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
-  };
-
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
@@ -95,20 +87,19 @@ class RecipeCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
     return (
       <div id="Pagina">
         <div id="NewRecipe">
+
           <form onSubmit={this.handleSubmit}>
             <div>
-                <TextField id="standard-dense" label="Título" margin="normal"/> 
+                <TextField id="standard-dense" label="Título" margin="normal" fullWidth="260px"/> 
             </div>
             <div>
-                <TextField id="standard-dense" label="Ingredientes" margin="normal"/> 
+                <TextField id="standard-dense" label="Ingredientes" margin="normal" fullWidth="260px"/> 
             </div>
             <div>
-                <TextField id="standard-multiline-flexible" label="Receita" multiline rowsMax="4" onChange={this.handleChange('multiline')} margin="normal"/> 
+                <TextField id="standard-multiline-flexible" label="Receita" multiline rowsMax="4" onChange={this.handleChange('multiline')} margin="normal" fullWidth="260px"/> 
             </div>
             <div>
               <IconButton title="Add" aria-label="Add" color="primary">
@@ -153,17 +144,17 @@ class RecipeCard extends React.Component {
                 </IconButton>
                 <IconButton
                   className={classnames(classes.expand, {
-                    [classes.expandOpen]: this.state.expanded,
+                    [classes.expandOpen]: this.state.expanded0,
                   })}
-                  onClick={this.handleExpandClick}
-                  aria-expanded={this.state.expanded}
+                  onClick={this.handleExpandClick0}
+                  aria-expanded={this.state.expanded0}
                   aria-label="Show more"
                 > 
                 <ExpandMoreIcon />
                 </IconButton>
               </CardActions>
             </CardContent>
-            <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+            <Collapse in={this.state.expanded0} timeout="auto" unmountOnExit>
               <CardContent>
                 <Typography paragraph>Method:</Typography>
                 <Typography paragraph>
@@ -228,17 +219,17 @@ class RecipeCard extends React.Component {
                 </IconButton>
                 <IconButton
                   className={classnames(classes.expand, {
-                    [classes.expandOpen]: this.state.expanded,
+                    [classes.expandOpen]: this.state.expanded1,
                   })}
-                  onClick={this.handleExpandClick}
-                  aria-expanded={this.state.expanded}
+                  onClick={this.handleExpandClick1}
+                  aria-expanded={this.state.expanded1}
                   aria-label="Show more"
                 > 
                 <ExpandMoreIcon />
                 </IconButton>
               </CardActions>
             </CardContent>
-            <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+            <Collapse in={this.state.expanded1} timeout="auto" unmountOnExit>
               <CardContent>
                 <Typography paragraph>Method:</Typography>
                 <Typography paragraph>
@@ -303,17 +294,17 @@ class RecipeCard extends React.Component {
                 </IconButton>
                 <IconButton
                   className={classnames(classes.expand, {
-                    [classes.expandOpen]: this.state.expanded,
+                    [classes.expandOpen]: this.state.expanded2,
                   })}
-                  onClick={this.handleExpandClick}
-                  aria-expanded={this.state.expanded}
+                  onClick={this.handleExpandClick2}
+                  aria-expanded={this.state.expanded2}
                   aria-label="Show more"
                 > 
                 <ExpandMoreIcon />
                 </IconButton>
               </CardActions>
             </CardContent>
-            <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+            <Collapse in={this.state.expanded2} timeout="auto" unmountOnExit>
               <CardContent>
                 <Typography paragraph>Method:</Typography>
                 <Typography paragraph>
