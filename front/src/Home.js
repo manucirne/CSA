@@ -1,3 +1,4 @@
+// @ts-check
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import { Toolbar, IconButton, Typography } from '@material-ui/core';
@@ -13,6 +14,7 @@ import './Home.css';
 import Login from './Login.js'
 import Colheita from './Colheitas'
 import FormColheita from './FormColheita'
+import Dash from './Dash'
 
 class Home extends Component {
     constructor(props){
@@ -23,7 +25,6 @@ class Home extends Component {
           id_colheita: null,
         }
     }
-
 
     handleChange = (event, value) => {
     this.setState({ value });
@@ -96,7 +97,7 @@ class Home extends Component {
                   </Link>
               </BottomNavigation>
 
-            <Route exact path="/" component={Teste} />
+            <Route exact path="/" component={Dash} />
             <Route path="/login" component={logInFunction} />
             <Route path="/receitas" component={Receitas} />
             <Route exact path="/colheita" component={checkLogInColheita} />
@@ -105,14 +106,6 @@ class Home extends Component {
           </Router>  
         );
     }
-}
-
-function Teste() {
-  return (
-    <div>
-      <h2>FOI</h2>
-    </div>
-  );
 }
 
 function Receitas() {
