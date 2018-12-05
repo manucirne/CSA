@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom
 import './Home.css';
 import Login from './Login.js'
 import Colheita from './Colheitas'
-import Nova from './FormColheita'
+import FormColheita from './FormColheita'
 
 class Home extends Component {
     constructor(props){
@@ -20,6 +20,7 @@ class Home extends Component {
         this.state = {
           user_id: null,
           user_name: null,
+          id_colheita: null,
         }
     }
 
@@ -43,12 +44,22 @@ class Home extends Component {
       const checkLogInColheita = () =>{
         if(this.state.user_id){
           return(
-            <Colheita user_name={this.state.user_name} data={this.state.data} />
+            <Colheita user_name={this.state.user_name} data={this.state.data} callbackFromColheita={callbackColheita} />
         )}
         return(
           <Redirect to={{pathname: '/login'}}/>
         )    
-    }
+      }
+
+      const callbackColheita = (idColheita) => {
+        this.setState({ id_colheita: idColheita})
+      }
+
+      const newColheita = () =>{
+        return(
+          <FormColheita passIdColheita={this.state.id_colheita} />
+        )
+      }
 
         return(
           <Router>
@@ -89,7 +100,7 @@ class Home extends Component {
             <Route path="/login" component={logInFunction} />
             <Route path="/receitas" component={Receitas} />
             <Route exact path="/colheita" component={checkLogInColheita} />
-            <Route path="/colheita/nova" component={Nova} />
+            <Route path="/colheita/nova" component={newColheita} />
             </div>
           </Router>  
         );

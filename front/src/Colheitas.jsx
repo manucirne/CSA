@@ -6,11 +6,16 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Link } from "react-router-dom";
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default class Colheitas extends Component{
     constructor(props){
         super(props)
-        this.state = { data:[] }
+        this.state = {
+            data:[],
+            // id_colheita: null,
+        }
     }
 
     request = async() => {
@@ -27,12 +32,22 @@ export default class Colheitas extends Component{
     }
     
     componentWillMount() {
-        //this.request();
+        this.request();
+    }
+
+    callbackColheita = (idColheita) => {
+        this.props.callbackFromColheita(idColheita);
+        //https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
+    }
+
+    deleteColheita = (idColheita) =>{
+        console.log("Aqui a colheita será apagada!")
+        //Aqui a colheita será apagada....
     }
     
     render(){
         var cards = [];
-        var page = []
+        var page = [];
 
         for (var i=0; i<this.state.data.length; i++){
             var colheita = this.state.data[i];
@@ -51,6 +66,12 @@ export default class Colheitas extends Component{
                         <CardContent>
                             <Typography variant="h5" component="h2">
                                 <b>{key}</b>
+                                <Link to="./colheita/nova">
+                                    <Button size="small" onClick={this.callbackColheita.bind(this, colheita["_id"])}>Editar</Button>
+                                </Link>
+                                <IconButton aria-label="Delete" onClick={this.deleteColheita.bind(this, colheita["_id"])}>
+                                    <DeleteIcon />
+                                </IconButton>
                             </Typography>
                             <Typography component="p">
                                 <u><b>Deposito:</b></u> {Jdados[key]["deposito"]}
@@ -78,8 +99,7 @@ export default class Colheitas extends Component{
             alignItems="flex-start">
                 <h1>COLHEITAS</h1>
                 <Link to="./colheita/nova">
-                    {/* <Button variant="fab" color="primary" aria-label="Add" onClick={this.setState({id_colheita:3})}> */}
-                    <Button variant="fab" color="primary" aria-label="Add">
+                    <Button variant="fab" color="primary" aria-label="Add" onClick={this.callbackColheita.bind(this, null)}>
                         <AddIcon />
                     </Button>
                 </Link>
