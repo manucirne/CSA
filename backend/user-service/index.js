@@ -32,6 +32,7 @@ app.post("/login", (req,res) => {
     }
     repository.getLogin(req.body.username, req.body.password, (err, user) => {
         if(err) return err;
+        console.log('RETRIEVED', user)
         return res.json(user)
     })
 })
