@@ -26,22 +26,28 @@ class Home extends Component {
         }
     }
 
+    componentWillMount() {
+      if (window.localStorage.user) {
+        this.setState({
+          user: JSON.parse(window.localStorage.user) 
+        })
+      }
+    }
+
     handleChange = (event, value) => {
     this.setState({ value });
-    };
+    }
 
-    render(){
+    
+    // Funcoes provisórias de login (pessoal do login pode mudar aqui pra fazer o login funcionar com back)
+    onUserLogin = (userJson) => {
+      console.log('salve', userJson)
+      this.setState({ user: userJson })
+      window.localStorage.setItem('user', JSON.stringify(userJson))
+    }
 
-      // Funcoes provisórias de login (pessoal do login pode mudar aqui pra fazer o login funcionar com back)
-      const LogIn = () =>{
-        this.setState({user_id:true})
-      }
-      const logInFunction = () =>{
-        return(
-          <Login stateFunction={LogIn} />
-        )
-      }
-  
+
+    render(){  
       const checkLogInColheita = () =>{
         if(this.state.user_id){
           return(
@@ -58,7 +64,7 @@ class Home extends Component {
 
       const newColheita = () =>{
         return(
-          <FormColheita passIdColheita={this.state.id_colheita} />
+          <FormColheita idColheita={this.state.id_colheita} />
         )
       }
 
@@ -97,8 +103,8 @@ class Home extends Component {
                   </Link>
               </BottomNavigation>
 
-            <Route exact path="/" component={Dash} />
-            <Route path="/login" component={logInFunction} />
+            
+            <Route path="/login" render={(props) => <Login {...props} onLogin={this.onUserLogin} /> } />
             <Route path="/receitas" component={Receitas} />
             <Route exact path="/colheita" component={checkLogInColheita} />
             <Route path="/colheita/nova" component={newColheita} />
