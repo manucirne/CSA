@@ -13,8 +13,8 @@ import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom
 import './Home.css';
 import Login from './Login.js'
 import Colheita from './Colheitas'
-import FormColheita from './FormColheita'
-import Dash from './Dash'
+import Nova from './FormColheita'
+import Dash from './Dash.js'
 
 class Home extends Component {
     constructor(props){
@@ -22,7 +22,6 @@ class Home extends Component {
         this.state = {
           user_id: null,
           user_name: null,
-          id_colheita: null,
         }
     }
 
@@ -45,22 +44,17 @@ class Home extends Component {
       const checkLogInColheita = () =>{
         if(this.state.user_id){
           return(
-            <Colheita user_name={this.state.user_name} data={this.state.data} callbackFromColheita={callbackColheita} />
+            <Colheita user_name={this.state.user_name} data={this.state.data} />
         )}
         return(
           <Redirect to={{pathname: '/login'}}/>
         )    
-      }
-
-      const callbackColheita = (idColheita) => {
-        this.setState({ id_colheita: idColheita})
-      }
-
-      const newColheita = () =>{
-        return(
-          <FormColheita idColheita={this.state.id_colheita} />
-        )
-      }
+    }
+    const dashing = () =>{
+      return(
+      <Dash id={null}></Dash>
+      )
+    }
 
         return(
           <Router>
@@ -97,11 +91,11 @@ class Home extends Component {
                   </Link>
               </BottomNavigation>
 
-            <Route exact path="/" component={Dash} />
+            <Route exact path="/" component={dashing} />
             <Route path="/login" component={logInFunction} />
             <Route path="/receitas" component={Receitas} />
             <Route exact path="/colheita" component={checkLogInColheita} />
-            <Route path="/colheita/nova" component={newColheita} />
+            <Route path="/colheita/nova" component={Nova} />
             </div>
           </Router>  
         );

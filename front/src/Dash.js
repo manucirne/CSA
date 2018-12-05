@@ -187,12 +187,12 @@ class Dash extends Component {
     //var id = this.props.id ---pessoal do login tem que passar id como props
     
     //chama todas colheitas feitas
-    var data_user  = await this.callApi_user(id)
-      this.setState({ kg_user:data_user[0] , alimentos_user:data_user[1]})
+    var data_geral  = await this.callApi_general()
+      this.setState({ kg_geral:data_geral[0] , alimentos_geral:data_geral[1]})
     // caso haja id(usuário está logado), chama as colheitas feitas pelo usuário
     if(id !== null){
-      var data_geral  = await this.callApi_general()
-      this.setState({ kg_geral:data_geral[0] , alimentos_geral:data_geral[1]})
+    var data_user  = await this.callApi_user(id)
+      this.setState({ kg_user:data_user[0] , alimentos_user:data_user[1]})
     }
   }
 
