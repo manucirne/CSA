@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import FuzzyBar from './FuzzyBar';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Redirect } from 'react-router'
-
+import { Redirect } from 'react-router';
+// import { Link } from 'react-router-dom';
 
 
   const produtores = [
@@ -38,11 +38,30 @@ import { Redirect } from 'react-router'
         value: "belexa",
         label: "beleza"
       },
-      {
+      { 
           value:'Outro',
-          label: "beleza"
+          label: "outro"
       }
   ]
+
+  const unidades = [
+    {
+        value: "kg",
+        label: "Kg"
+    },
+    {
+        value: "folhas",
+        label: "folhas"
+    },
+    {
+      value: "maços",
+      label: "maços"
+    },
+    {
+        value:'bacias',
+        label: "bacias"
+    }
+]
 
 export default class FormColheita extends Component{
     constructor(props){
@@ -60,6 +79,7 @@ export default class FormColheita extends Component{
             mensagem: null,
             canteiros: null,
             n_colhidos: null,
+            unidade: "",
         }
     }
 
@@ -67,7 +87,7 @@ export default class FormColheita extends Component{
     componentWillMount() {
         //this.fetchData();
         if(this.props.idColheita != null){
-        this.fetchOldColheita();
+          this.fetchOldColheita();
         }
      }
 
@@ -83,6 +103,7 @@ export default class FormColheita extends Component{
       let canteiros = this.state.canteiros;
       let n_colhido = this.state.n_colhido;
       let mensagem = this.state.mensagem;
+      let unidade = this.state.unidade;
 
         let formData = {
             // Tem que ter:
@@ -90,20 +111,28 @@ export default class FormColheita extends Component{
             //Pegar outros dados do form
             inserir: true,
             id_autor: "1",
-            nome: nome,
-            produtor: produtor,
-            data: data,
-            variedade: variedade,
-            n_bercos: n_bercos,
-            canteiros: canteiros,
-            n_colhido: n_colhido,
+            timestamp: null,
+            data_colheita: data + "T12:00:00Z",
+            id_agricultor: produtor,
+            detalhes_colheita: {}
+          }
+        formData["detalhes_colheita"][variedade] = {
+            deposito: "minha casa",
+            quant_bercos: n_bercos,
+            unidade: unidade,
+            canteiros_colhidos: canteiros,
+            quantidade: n_colhido,
             mensagem: mensagem
         }
-
+        let method = "POST"
+        if(this.props.idColheita != null){
+          method = "PUT"
+          formData["_id"] = this.props.idColheita
+        }
         console.log(formData)
         let res = await fetch('/colheitas', //Acertar URI back
         {
-            method: 'POST',
+            method: method,
             headers: {'Accept': 'application/json',
             'Content-Type': 'application/json'},
             body: JSON.stringify(formData)
@@ -141,7 +170,7 @@ export default class FormColheita extends Component{
           for (var key in Jdados){
             this.state.variedade = console.log(key)
             this.state.n_bercos =  Jdados[key]["quant_bercos"]
-            this.state.canteiros = Jdados[key]["canteiros_colhidos"][0]
+            this.state.canteiros = Jdados[key]["canteiros_colhidos"]
             this.state.n_colhido = Jdados[key]["quantidade"]
             this.state.mensagem = Jdados[key]["mensagem"]
 
@@ -150,12 +179,11 @@ export default class FormColheita extends Component{
               nome: 'tenorio',
               n_bercos: Jdados[key]["quant_bercos"],
               mensagem: Jdados[key]["mensagem"],
-              canteiros: Jdados[key]["canteiros_colhidos"][0],
+              canteiros: Jdados[key]["canteiros_colhidos"],
               n_colhidos: Jdados[key]["quantidade"],
           })
           }
         }
-
       }
  
      fetchData = async () => {   
@@ -203,7 +231,7 @@ export default class FormColheita extends Component{
           value={this.state.produtor}
           onChange={this.handleChange("produtor")}
           SelectProps={{
-            native: true
+            native: false
           }}
           helperText="Para qual produtor está colhendo?"
           margin="normal"
@@ -217,10 +245,10 @@ export default class FormColheita extends Component{
         </TextField>
 
             <TextField
-                id="date-colheita"
+                id="data_colheita"
                 label="Data da colheita"
                 type="date"
-                onChange={this.handleChange("data_colheita")}
+                onChange={this.handleChange("data")}
                 margin="normal"
                 variant="outlined"
                 InputLabelProps={{
@@ -235,7 +263,7 @@ export default class FormColheita extends Component{
           value={this.state.variedade}
           onChange={this.handleChange("variedade")}
           SelectProps={{
-            native: true
+            native: false
           }}
           helperText="Qual variedade foi colhida?"
           margin="normal"
@@ -278,6 +306,26 @@ export default class FormColheita extends Component{
         />
 
         <TextField
+          id="select-unidade"
+          select
+          label="Unidade"
+          value={this.state.unidade}
+          onChange={this.handleChange("unidade")}
+          SelectProps={{
+            native: false
+          }}
+          helperText="qual a unidade?"
+          margin="normal"
+          variant="outlined"
+        >
+          {unidades.map(option => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </TextField>
+
+        <TextField
             id="canteiros"
             label="Mensagem"
             helperText="Se quiser, escreva uma mensagem"
@@ -287,13 +335,15 @@ export default class FormColheita extends Component{
             variant="outlined"
             multiline
         /> 
-
-        <Button
-         variant="contained"
-         color="primary"
-         onClick={this.submitForm}>
-        Enviar
-        </Button>        
+          
+        {/* <Link to="./colheita"> */}
+          <Button
+          variant="contained"
+          color="primary"
+          onClick={this.submitForm}>
+          Enviar
+          </Button>
+        {/* </Link> */}
         </form>
             
         </div>

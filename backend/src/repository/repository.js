@@ -51,8 +51,9 @@ function insereNovaColheita(dadosColheita,callback){
 }
 
 function editaColheita(id,dadosColheita,callback){
+    console.log(dadosColheita,111)
     mongodb.connect((err,db) => {
-        db.collection(collectionDado).updateOne({_id:require("mongodb").ObjectId(id)},dadosColheita,(err, res) =>{
+        db.collection(collectionDado).updateOne({_id:require("mongodb").ObjectId(id)},{$set:dadosColheita.data},(err, res) =>{
             if (err) throw err;
             console.log("Colheita atualizada");
         });

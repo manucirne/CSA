@@ -21,10 +21,9 @@ module.exports = (app, repository) => {
     
 
       app.post('/colheitas', (req, res) => {
-        // console.log(req.body) 
-
+        console.log(req.body)
         if(req.body.inserir){
-            repository.insereNovaColheita(req.body.inserir,(err, colheitas) => {
+            repository.insereNovaColheita(req.body,(err, colheitas) => {
                 if(err) return next(err);
                 res.status(200).send('Colheita inserida com sucesso!');
             });
@@ -82,8 +81,10 @@ module.exports = (app, repository) => {
     });
 
     app.put('/colheitas',(req,res)=>{
-        if(req.body && req.body._id){
-            repository.editaColheita(req.body._id,req.body,(err,colheita)=>{
+        if(req.body){
+            let dados = {}
+            dados["data"] = req.body;
+            repository.editaColheita(req.body._id,dados,(err,colheita)=>{
                 if(err){
                     console.log(err)
                 }

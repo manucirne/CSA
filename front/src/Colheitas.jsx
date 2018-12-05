@@ -27,6 +27,7 @@ export default class Colheitas extends Component{
             })
         });
         const futureJson = await response.json();
+        console.log(futureJson)
         this.setState({ data: futureJson });
     }
     
