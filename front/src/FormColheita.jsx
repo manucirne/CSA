@@ -51,6 +51,7 @@ export default class FormColheita extends Component{
         this.state = {
             variedades: null,
             toDashboard: false,
+            name: 'tenorio',
         }
     }
 
@@ -59,13 +60,36 @@ export default class FormColheita extends Component{
         //this.fetchData()
      }
 
+
+
      submitForm = async (event) => {
+      console.log(this.state.name);
+      let nome = this.state.nome;
+      let produtor = this.state.produtor;
+      let data = this.state.data;
+      let variedade = this.state.variedade;
+      let n_bercos = this.state.n_bercos;
+      let canteiros = this.state.canteiros;
+      let n_colhido = this.state.n_colhido;
+      let mensagem = this.state.mensagem;
+
         let formData = {
             // Tem que ter:
             // ID usuário - pegar do login
             //Pegar outros dados do form
+            id_autor: "1",
+            nome: nome,
+            produtor: produtor,
+            data: data,
+            variedade: variedade,
+            n_bercos: n_bercos,
+            canteiros: canteiros,
+            n_colhido: n_colhido,
+            mensagem: mensagem
         }
-        let res = await fetch('http://1.2.3.4:5000/colheita/nova', //Acertar URI back
+
+        console.log(formData)
+        let res = await fetch('/colheita/nova', //Acertar URI back
         {
             method: 'POST',
             headers: {'Accept': 'application/json',
@@ -84,7 +108,7 @@ export default class FormColheita extends Component{
       };
  
      fetchData = async () => {
-         let res = await fetch('http://1.2.3.4:5000/colheita',{ //ACERTAR API AGRICULTORES
+         let res = await fetch('/colheita',{ //ACERTAR API AGRICULTORES
              method: 'POST',
              headers: {'Accept': 'application/json',
                 'Content-Type': 'application/json'},
@@ -174,8 +198,8 @@ export default class FormColheita extends Component{
         <TextField
                 id="numero-bercos"
                 label="Numero de berços colhidos"
-                value={this.state.name}
-                onChange={this.handleChange('numero-bercos')}
+                value={this.state.n_bercos}
+                onChange={this.handleChange('n_bercos')}
                 margin="normal"
                 variant="outlined"
             />
@@ -183,18 +207,18 @@ export default class FormColheita extends Component{
         <TextField
                 id="canteiros"
                 label="De quais canteiros você colheu?"
-                value={this.state.name}
+                value={this.state.canteiros}
                 onChange={this.handleChange('canteiros')}
                 margin="normal"
                 variant="outlined"
             />
 
         <TextField
-            id="canteiros"
+            id="n_colhido"
             label="Quanto foi colhido?"
             helperText="Se não souber, deixe em branco"
-            value={this.state.name}
-            onChange={this.handleChange('canteiros')}
+            value={this.state.n_colhido}
+            onChange={this.handleChange('n_colhido')}
             margin="normal"
             variant="outlined"
         />
@@ -203,8 +227,8 @@ export default class FormColheita extends Component{
             id="canteiros"
             label="Mensagem"
             helperText="Se quiser, escreva uma mensagem"
-            value={this.state.name}
-            onChange={this.handleChange('canteiros')}
+            value={this.state.mensagem}
+            onChange={this.handleChange('mensagem')}
             margin="normal"
             variant="outlined"
             multiline
@@ -214,7 +238,7 @@ export default class FormColheita extends Component{
          variant="contained"
          color="primary"
          onClick={this.submitForm}>
-        Primary
+        Enviar
         </Button>        
         </form>
             
