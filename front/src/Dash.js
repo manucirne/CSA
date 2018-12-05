@@ -217,17 +217,12 @@ class Dash extends Component {
     })
   }
 
-
-
-
-
-
   render () {
     var id = "1"
     //var id = this.props.id ---pessoal do login tem que passar id como props
     return (
       <div>
-        <nav className="navbar navbar-default navbar-fixed-top">
+        <nav>
           <div className="container-fluid">
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">

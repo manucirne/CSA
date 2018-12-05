@@ -79,11 +79,11 @@ class Home extends Component {
                     </IconButton>
                   </Link>
                     <Typography variant="h6" color="inherit" className="grow">
-                        CSA
+                        <h1 style={{color:"white"}}>CSA</h1>
                     </Typography>
 
                       <Button color="inherit">
-                        <Link to="/login" style={{textDecoration:'none', color:'white'}}>Login</Link>
+                        <Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>
                       </Button>
                   
                 </Toolbar>
@@ -104,10 +104,10 @@ class Home extends Component {
               </BottomNavigation>
 
             <Route exact path="/" component={Dash} />
-            <Route path="/login" render={(props) => <Login {...props} onLogin={this.onUserLogin} /> } />
-            <Route path="/receitas" component={Receitas} />
+            <Route exact path="/login" render={(props) => <Login {...props} onLogin={this.onUserLogin} /> } />
+            <Route exact path="/receitas" component={Receitas} />
             <Route exact path="/colheita" component={checkLogInColheita} />
-            <Route path="/colheita/nova" component={newColheita} />
+            <Route exact path="/colheita/nova" component={newColheita} />
             </div>
           </Router>  
         );
