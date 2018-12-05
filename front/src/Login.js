@@ -44,12 +44,12 @@ class Login extends Component {
       console.log("fhsdgdfg");
       console.log(responseJson);
 
-      if (responseJson.id) {
+      if (responseJson._id) {
         this.props.onLogin(responseJson)
         this.props.history.push('/')
       }
 
-      else if (responseJson.id == null) {
+      else if (responseJson._id == null) {
         this.setState({ errorMessage: 'Usuário ou senha inválidos'})
       }
 
