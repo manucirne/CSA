@@ -183,7 +183,7 @@ class Dash extends Component {
 
   // Calls Api and set State
   async componentWillMount(){
-    var id = "1"
+    var id = null
     //var id = this.props.id ---pessoal do login tem que passar id como props
       var data_geral  = await this.callApi_general()
       this.setState({ kg_geral:data_geral[0] , alimentos_geral:data_geral[1]})
@@ -218,7 +218,7 @@ class Dash extends Component {
   }
 
   render () {
-    var id = "1"
+    var id = null
     //var id = this.props.id ---pessoal do login tem que passar id como props
     return (
       <div>
