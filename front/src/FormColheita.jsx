@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FuzzyBar from './FuzzyBar';
 import TextField from '@material-ui/core/TextField';
-import "./FormColheita.css";
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router'
 

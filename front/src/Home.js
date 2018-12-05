@@ -1,3 +1,4 @@
+// @ts-check
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import { Toolbar, IconButton, Typography } from '@material-ui/core';
@@ -12,16 +13,18 @@ import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom
 import './Home.css';
 import Login from './Login.js'
 import Colheita from './Colheitas'
+import FormColheita from './FormColheita'
+import Dash from './Dash'
 
 class Home extends Component {
     constructor(props){
         super(props)
         this.state = {
           user_id: null,
-          user_name: null
+          user_name: null,
+          id_colheita: null,
         }
     }
-
 
     handleChange = (event, value) => {
     this.setState({ value });
@@ -42,12 +45,22 @@ class Home extends Component {
       const checkLogInColheita = () =>{
         if(this.state.user_id){
           return(
-            <Colheita user_name={this.state.user_name} />
+            <Colheita user_name={this.state.user_name} data={this.state.data} callbackFromColheita={callbackColheita} />
         )}
         return(
           <Redirect to={{pathname: '/login'}}/>
         )    
-    }
+      }
+
+      const callbackColheita = (idColheita) => {
+        this.setState({ id_colheita: idColheita})
+      }
+
+      const newColheita = () =>{
+        return(
+          <FormColheita passIdColheita={this.state.id_colheita} />
+        )
+      }
 
         return(
           <Router>
@@ -84,22 +97,15 @@ class Home extends Component {
                   </Link>
               </BottomNavigation>
 
-            <Route exact path="/" component={Teste} />
+            <Route exact path="/" component={Dash} />
             <Route path="/login" component={logInFunction} />
             <Route path="/receitas" component={Receitas} />
-            <Route path="/colheita" component={checkLogInColheita} />
+            <Route exact path="/colheita" component={checkLogInColheita} />
+            <Route path="/colheita/nova" component={newColheita} />
             </div>
           </Router>  
         );
     }
-}
-
-function Teste() {
-  return (
-    <div>
-      <h2>FOI</h2>
-    </div>
-  );
 }
 
 function Receitas() {
