@@ -68,6 +68,21 @@ class Home extends Component {
         )
       }
 
+      const LogOut = () =>{
+        this.setState({user:""})
+      } 
+
+      const nome = () =>{
+        if(this.state.user.nome_completo == "" || this.state.user == "" ){
+          return(
+            <Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>
+          )
+        }
+        return(
+          <Button onClick={LogOut} style={{textDecoration:'none', color:"white", fontSize:"16px"}}>{this.state.user.nome_completo}</Button>
+        )
+      }
+
         return(
           <Router>
             <div className="root">
@@ -81,10 +96,8 @@ class Home extends Component {
                     <Typography variant="h6" color="inherit" className="grow">
                         <h1 style={{color:"white"}}>CSA</h1>
                     </Typography>
-
-                      <Button color="inherit">
-                        <Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>
-                      </Button>
+                      
+                      {nome()}
                   
                 </Toolbar>
               </AppBar>
