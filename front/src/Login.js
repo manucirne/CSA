@@ -12,11 +12,16 @@ class Login extends Component {
       username: "",
       passsword: "",
       _id: "",
-      response: null
+      response: null,
+      errorMessage: null
     }
   }
 
   login = async () => {
+    if (this.state.username === '' || this.state.password === '') {
+      this.setState({ errorMessage: 'Por favor coloque seu usuario e sua senha'})
+    }
+
     try {
       let response = await fetch('/login', {
         method: 'POST',
@@ -26,13 +31,19 @@ class Login extends Component {
         },
         body: JSON.stringify({
           username: this.state.username,
-          password: this.state.password})
+          password: this.state.password
+         })
       })
     
       let responseJson = await response.json()
-      this.state._id = responseJson._id;
+
       console.log("fhsdgdfg");
-      console.log(this.state);
+      console.log(responseJson);
+
+      if (responseJson.id) {
+        this.props.onLogin(responseJson)
+        this.props.history.push('/')
+      }
 
     } catch (error) {
       console.log(error)
@@ -62,12 +73,13 @@ class Login extends Component {
               this.setState({ password: ev.target.value })}} /><span class="highlight"></span><span class="bar"></span>
             <label>Senha</label>
           </div>
-          <Link to="/">
+          {/* <Link to="/"> */}
             <Button type="button" class="button buttonBlue" onClick={this.login} >
               Confirmar
               <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
             </Button>
-          </Link>
+          {/* </Link> */}
+          { this.state.errorMessage }
         </form>
       </div>
     );
