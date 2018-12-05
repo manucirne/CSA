@@ -88,6 +88,7 @@ export default class FormColheita extends Component{
             // Tem que ter:
             // ID usuário - pegar do login
             //Pegar outros dados do form
+            inserir: true,
             id_autor: "1",
             nome: nome,
             produtor: produtor,
@@ -100,7 +101,7 @@ export default class FormColheita extends Component{
         }
 
         console.log(formData)
-        let res = await fetch('/colheita/nova', //Acertar URI back
+        let res = await fetch('/colheitas', //Acertar URI back
         {
             method: 'POST',
             headers: {'Accept': 'application/json',
