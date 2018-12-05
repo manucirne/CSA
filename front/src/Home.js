@@ -14,7 +14,7 @@ import './Home.css';
 import Login from './Login.js'
 import Colheita from './Colheitas'
 import FormColheita from './FormColheita'
-import Dash from './Dash'
+import Dash from './Dash.js'
 
 class Home extends Component {
     constructor(props){
