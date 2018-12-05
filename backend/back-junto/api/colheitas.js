@@ -74,8 +74,6 @@ module.exports = (app, repository) => {
 
     app.delete('/colheitas',(req,res)=>{
         if(req.body._id){
-
-        
         repository.deletaColheita(req.body._id,(err,colheita)=>{
             if(err){
                 console.log(err)
@@ -90,7 +88,7 @@ module.exports = (app, repository) => {
 
     app.put('/colheitas',(req,res)=>{
         if(req.body && req.body._id){
-            repository.deletaColheita(req.body._id,req.body,(err,colheita)=>{
+            repository.editaColheita(req.body._id,req.body,(err,colheita)=>{
                 if(err){
                     console.log(err)
                 }

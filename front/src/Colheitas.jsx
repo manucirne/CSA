@@ -14,7 +14,6 @@ export default class Colheitas extends Component{
         super(props)
         this.state = {
             data:[],
-            // id_colheita: null,
         }
     }
 
@@ -24,7 +23,7 @@ export default class Colheitas extends Component{
             headers: {'Accept': 'application/json',
                'Content-Type': 'application/json'},
             body: JSON.stringify({
-                // id_autor: this.props.user_id
+                id_autor: "1"
             })
         });
         const futureJson = await response.json();
@@ -48,6 +47,7 @@ export default class Colheitas extends Component{
             'Content-Type': 'application/json'},
             body: JSON.stringify({ _id: idColheita })
         })
+        // this.request();
     }
     
     render(){
