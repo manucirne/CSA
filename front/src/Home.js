@@ -64,7 +64,7 @@ class Home extends Component {
 
       const newColheita = () =>{
         return(
-          <FormColheita passIdColheita={this.state.id_colheita} />
+          <FormColheita idColheita={this.state.id_colheita} />
         )
       }
 
