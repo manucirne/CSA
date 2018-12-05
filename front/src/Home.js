@@ -15,6 +15,7 @@ import Login from './Login.js'
 import Colheita from './Colheitas'
 import FormColheita from './FormColheita'
 import Dash from './Dash.js'
+import RecipeCard from './Card'
 
 class Home extends Component {
     constructor(props){
@@ -23,7 +24,7 @@ class Home extends Component {
           user_id: null,
           user_name: null,
           id_colheita: null,
-          user: {}
+          user: ""
         }
     }
 
@@ -84,19 +85,16 @@ class Home extends Component {
           )}
     }
 
-      const nome = () =>{
-        if(this.state.user == null){
-          return(<Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>)
-        }
-        else if(this.state.user.nome_completo == "" || this.state.user == "" ){
-          return(
-            <Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>
-          )
-        }
+    const nome = () =>{
+      if(this.state.user.nome_completo == "" || this.state.user == "" ){
         return(
-          <Button onClick={LogOut} style={{textDecoration:'none', color:"white", fontSize:"16px"}}>{this.state.user.nome_completo}</Button>
+          <Link to="/login" style={{textDecoration:'none', color:'white', fontSize:"18px"}}>Login</Link>
         )
       }
+      return(
+        <Button onClick={LogOut} style={{textDecoration:'none', color:"white", fontSize:"16px"}}>{this.state.user.nome_completo}</Button>
+      )
+    }
 
         return(
           <Router>
@@ -133,7 +131,7 @@ class Home extends Component {
 
             <Route exact path="/" component={add_dash} />
             <Route exact path="/login" render={(props) => <Login {...props} onLogin={this.onUserLogin} /> } />
-            <Route exact path="/receitas" component={Receitas} />
+            <Route exact path="/receitas" component={RecipeCard} />
             <Route exact path="/colheita" component={checkLogInColheita} />
             <Route exact path="/colheita/nova" component={newColheita} />
             </div>
@@ -142,11 +140,4 @@ class Home extends Component {
     }
 }
 
-function Receitas() {
-  return (
-    <div>
-      <h2>OLHA O BOLOOOO</h2>
-    </div>
-  );
-}
 export default Home;
